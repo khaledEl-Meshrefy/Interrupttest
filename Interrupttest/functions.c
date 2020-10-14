@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <avr/io.h>
 #include "functions.h"
+
+
 int isPressedD (int pinNumber){
 	if (PIND & (1<< pinNumber)){
 		return 1;
@@ -81,6 +83,69 @@ void resetPinC (int  pinnumber){
 
 void togglePinC (int  pinnumber){
 	PORTC ^=(1<<pinnumber);
+}
+void INT0_init(int mode){
+	switch(mode){
+		case AnylogicalMode :
+		MCUCR |= (1<<ISC00) ;  // ANYLOGICAL CHANGE.
+		break;
+		
+		case RisingMode :
+		MCUCR |= (1<<ISC01)|(1<<ISC00) ;  // Rising
+		break;
+		
+		case FallingMode :
+		MCUCR |= (1<<ISC01) ;  // Falling
+		break;
+		
+		case  LowlevelMode:
+		break;
+	}
+	GICR |= (1<<INT0);/* Int0 enable*/
+
+
+
+}
+void INT1_init(int mode){
+	switch(mode){
+		case AnylogicalMode :
+		MCUCR |= (1<<ISC10) ;  // ANYLOGICAL CHANGE.
+		break;
+		
+		case RisingMode :
+		MCUCR |= (1<<ISC10)|(1<<ISC11) ;  // Rising
+		break;
+		
+		case FallingMode :
+		MCUCR |= (1<<ISC11) ;  // Falling
+		break;
+		
+		case  LowlevelMode:
+		break;
+	}
+	GICR |= (1<<INT1);/* Int0 enable*/
+
+
+
+}
+void INT2_init(int mode){
+	switch(mode){
+
+		
+		case RisingMode :
+		MCUCSR |= (1<<ISC2);  // Rising
+		break;
+		
+		case FallingMode :
+		MCUCSR &=~(1<<ISC2) ;  // Falling
+		break;
+		
+		
+	}
+	GICR |= (1<<INT2);/* Int2 enable*/
+
+
+
 }
 
 

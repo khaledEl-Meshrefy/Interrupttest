@@ -14,6 +14,10 @@
 
 
 #endif /* FUNCTIONS_H_ */
+#define  RisingMode 0
+#define  FallingMode 1
+#define  AnylogicalMode 2
+#define  LowlevelMode 3
 
 int isPressedA (int pinNumber);
 void setPinA (int pinnumber);
@@ -34,3 +38,6 @@ int isPressedD (int pinNumber);
 void setPinD (int pinnumber);
 void resetPinD (int  pinnumber);
 void togglePinD (int pinnumber);
+void INT0_init(int mode);
+void INT1_init(int mode);
+void INT2_init(int mode);
